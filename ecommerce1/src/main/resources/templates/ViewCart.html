@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+	body{
+	
+		background-image: url('https://images.unsplash.com/photo-1634574740238-e2fc9b49b740?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	}
+	
+	h1 {
+  font-size: 26px;
+  color: white;
+  
+}
+
+/* Style for table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #999;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+
+}
+
+/* Style for images inside the table */
+table img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Style for the total amount row */
+table tr:last-child td:first-child {
+  font-weight: bold;
+}
+
+/* Style for the back button */
+a {
+  text-decoration: none;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+table td{
+	color:black;
+}
+table{
+	background-color: white;
+	
+}
+</style>
+
+<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			setTimeout(function () {
+				var h2Elements = document.querySelectorAll('h2, h3');
+				h2Elements.forEach(function (element) {
+					element.style.display = 'none';
+				});
+			}, 1000);
+		});
+	</script>
+</head>
+
+<body>
+	<h2 th:text="${pass}"></h2>
+	<h3 th:text="${fail}"></h3>
+	<center><u><h1>Cart Items</h1></u></center>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Picture</th>
+			<th>Category</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Amount</th>
+		</tr>
+		<tr th:each="item:${cart.items}">
+			<td th:text="${item.name}"></td>
+			<td><img th:src="@{'data:image/jpeg;base64,'+${item.generateBase64Image()}}"></td>
+			<td th:text="${item.category}"></td>
+			<td th:text="${item.price/item.quantity}"></td>
+			<td th:text="${item.quantity}"></td>
+			<td th:text="${item.price}+'&#8377'"></td>
+		</tr>
+		<tr>
+			<td colspan="5">Total Amount:</td>
+			<td th:text="${cart.totalAmount}+'&#8377'"></td>
+		</tr>
+	</table>
+	<center><a href="/customer/payment"><button>Pay</button></a></center>
+	<br>
+	<center><a href="/customer/home"><button>Back</button></a></center>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Edit Product</title>
+    <style>
+		body {
+			background-image: url('https://images.unsplash.com/photo-1703249181171-22037ab2afd8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D');
+   
+    margin: 20px;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color:white;
+}
+
+form {
+    background-color:floralwhite;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="file"],
+button {
+    margin-bottom: 10px;
+    padding: 8px;
+  
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+img {
+    max-width: 200px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+center {
+    margin-top: 20px;
+}
+	</style>
+    
+</head>
+
+<body>
+   <center><h1>Update Product</h1></center> 
+  <center>  <form action="/admin/update-product" th:object="${product}" method="post" enctype="multipart/form-data">"
+       Name:<input type="text" th:field="*{name}" name="name"><br>
+       Image:<input type="file" name="pic"><br>
+        <img th:src="@{'data:image/jpeg;base64,'+${product.generateBase64Image()}}">
+        <input  th:field="*{id}" type="hidden" name="id">
+        Price:<input type="text" th:field="*{price}" name="price"><br>
+        Stock:<input type="text" th:field="*{stock}" name="stock"><br>
+        Category:<input type="text" th:field="*{category}" name="category"><br></center>
+        <center><button>Update</button></center>
+    </form>
+    <br>
+   <center><a href="/admin/home"><button>Back</button></a></center>
+</body>
+
+</html>
